@@ -1,0 +1,90 @@
+door_open_flash_lights:
+  alias: Flash Sly's Lightstrip 3x
+  sequence:
+  - data: {}
+    entity_id: light.philips_lightstrip
+    service: light.toggle
+  - delay: '1'
+  - entity_id: light.philips_lightstrip
+    service: light.toggle
+  - delay: '1'
+  - entity_id: light.philips_lightstrip
+    service: light.toggle
+  - delay: '1'
+  - entity_id: light.philips_lightstrip
+    service: light.toggle
+  - delay: '1'
+  - entity_id: light.philips_lightstrip
+    service: light.toggle
+  - delay: '1'
+  - entity_id: light.philips_lightstrip
+    service: light.toggle
+sleep_timer:
+  alias: 30-min lightstrip dim
+  sequence:
+  - data:
+      transition: 300
+    entity_id: light.philips_lightstrip
+    service: light.turn_off
+night_mode:
+  alias: LIGHTSTRIPS - red
+  sequence:
+  - data:
+      brightness_pct: 100
+      rgb_color:
+      - 255
+      - 0
+      - 0
+      transition: 1
+    entity_id: light.philips_lightstrip
+    service: light.turn_on
+'1580351436123':
+  alias: LIGHTSTRIPS - daytime
+  sequence:
+  - data:
+      brightness_pct: 100
+      profile: relax
+      transition: 1
+    entity_id: light.philips_lightstrip
+    service: light.turn_on
+'1580351647581':
+  alias: LIVING ROOM - red
+  sequence:
+  - data:
+      brightness_pct: 100
+      rgb_color:
+      - 255
+      - 0
+      - 0
+      transition: 1
+    entity_id: light.philips_bulb_livingroom
+    service: light.turn_on
+'1580351705007':
+  alias: LIVING ROOM - daytime
+  sequence:
+  - data:
+      brightness_pct: 100
+      profile: relax
+      transition: 1
+    entity_id: light.philips_bulb_livingroom
+    service: light.turn_on
+'1580352531901':
+  alias: Turn of all lights
+  sequence:
+  - entity_id: light.philips_lightstrip
+    service: light.turn_off
+  - entity_id: light.philips_bulb_livingroom
+    service: light.turn_off
+'1580372397207':
+  alias: Restart HASS
+  sequence:
+  - service: homeassistant.restart
+'1580885222594':
+  alias: ALARM CLOCK
+  sequence:
+  - data:
+      brightness_pct: 100
+      profile: relax
+      transition: 900
+    entity_id: light.philips_lightstrip
+    service: light.turn_on

@@ -1,0 +1,80 @@
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+http:
+  base_url: !secret hass_url
+  ssl_certificate: /ssl/fullchain.pem
+  ssl_key: /ssl/privkey.pem
+  
+
+# Text to speech
+tts:
+  - platform: google_translate
+    base_url: !secret base_url_tts
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+# Z Wave
+zwave:
+  network_key: !secret zwave_network_key
+
+# SendGrid
+
+notify:
+  - name: email_notifications
+    platform: smtp
+    server: !secret email_server
+    port: !secret email_port
+    sender: !secret email_sender
+    encryption: starttls
+    username: !secret email_username
+    password: !secret email_pw
+    recipient:
+      - !secret email_receiver1
+      - !secret email_receiver2
+    sender_name: SOS from Sly
+
+# Nest
+badnest:
+  issue_token: !secret issue_token
+  cookie: !secret cookie
+  region: us
+climate:
+  - platform: badnest
+    scan_interval: 10
+
+
+  
+# Enable themes
+frontend:
+  themes: !include_dir_merge_named themes
+ 
+ 
+
+sensor:
+    # RPi stats
+  - platform: command_line
+    name: CPU Temperature
+    command: "cat /sys/class/thermal/thermal_zone0/temp"
+    unit_of_measurement: "°C"
+    value_template: '{{ value | multiply(0.001) | round(1) }}'
+    # Sunset based floorplan bg color
+  - platform: template
+    sensors:
+      sun_brightness:
+        friendly_name: "Sun Brightness"
+        value_template: >-
+          {% if state_attr('sun.sun', 'elevation') > 20  %}
+            bright
+          {% elif state_attr('sun.sun', 'elevation') > 9 %}
+            mid    
+          {% elif state_attr('sun.sun', 'elevation') > -3 %}
+            dark                
+          {% else %}
+            black
+          {% endif %} 

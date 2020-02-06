@@ -1,0 +1,15 @@
+secrets.yaml
+.august.conf
+options.xml
+aircast.xml
+home-assistant.log
+home-assistant_v2.db
+OZW_Log.txt
+pyozw.sqlite
+zigbee.db
+zwcfg_0xd60eff57.xml
+zwscene.xml
+tts/
+www/
+themes/
+.storage/

@@ -1,0 +1,303 @@
+- id: '1579925678816'
+  alias: Turn Sly's lights red at 820PM
+  description: ''
+  trigger:
+  - at: '20:20:20'
+    platform: time
+  condition: []
+  action:
+  - data: {}
+    entity_id: script.night_mode
+    service: script.turn_on
+  - data:
+      message: Charge me!
+    service: notify.mobile_app_slyphone
+- id: '1579998554427'
+  alias: Bathroom lights (day)
+  description: ''
+  trigger:
+  - device_id: ddf9e2030aad43a49d330dc148c6eeca
+    domain: binary_sensor
+    entity_id: binary_sensor.philips_sml001_cdfeb504_occupancy
+    platform: device
+    type: occupied
+  condition:
+  - after: 07:30:00
+    before: '17:00:00'
+    condition: time
+  action:
+  - data:
+      brightness_pct: 90
+      kelvin: 6410
+      transition: 1
+    entity_id: group.bathroom_lights
+    service: light.turn_on
+- id: '1579998932428'
+  alias: Turn off bathroom lights
+  description: ''
+  trigger:
+  - device_id: ddf9e2030aad43a49d330dc148c6eeca
+    domain: binary_sensor
+    entity_id: binary_sensor.philips_sml001_cdfeb504_occupancy
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 20
+    platform: device
+    type: not_occupied
+  condition: []
+  action:
+  - entity_id: group.bathroom_lights
+    service: light.turn_off
+- id: '1579999585311'
+  alias: Turn off living room lights
+  description: ''
+  trigger:
+  - device_id: 75c970e4dc2345cbbe667a1a2ab48adc
+    domain: binary_sensor
+    entity_id: binary_sensor.philips_sml001_7a54b604_occupancy
+    for:
+      hours: 0
+      minutes: 1
+      seconds: 0
+    platform: device
+    type: not_occupied
+  condition:
+  - after: '21:00:00'
+    before: 07:30:00
+    condition: time
+  action:
+  - data:
+      transition: 1
+    entity_id: light.philips_bulb_livingroom
+    service: light.turn_off
+- id: '1580000416549'
+  alias: Bathroom lights (night)
+  description: ''
+  trigger:
+  - device_id: ddf9e2030aad43a49d330dc148c6eeca
+    domain: binary_sensor
+    entity_id: binary_sensor.philips_sml001_cdfeb504_occupancy
+    platform: device
+    type: occupied
+  condition:
+  - after: '17:00:00'
+    before: '21:00:00'
+    condition: time
+  action:
+  - data:
+      brightness_pct: 50
+      kelvin: 2000
+      transition: 1
+    entity_id: group.bathroom_lights
+    service: light.turn_on
+- id: '1580000683125'
+  alias: Bathroom lights (sleep)
+  description: ''
+  trigger:
+  - device_id: ddf9e2030aad43a49d330dc148c6eeca
+    domain: binary_sensor
+    entity_id: binary_sensor.philips_sml001_cdfeb504_occupancy
+    platform: device
+    type: occupied
+  condition:
+  - after: '21:00:00'
+    before: 07:30:00
+    condition: time
+  action:
+  - data:
+      brightness_pct: 2
+      kelvin: 2200
+      transition: 1
+    entity_id: group.bathroom_lights
+    service: light.turn_on
+- id: '1580001344814'
+  alias: 2nd bathroom lights (day and night)
+  description: ''
+  trigger:
+  - device_id: 75c970e4dc2345cbbe667a1a2ab48adc
+    domain: binary_sensor
+    entity_id: binary_sensor.philips_sml001_7a54b604_occupancy
+    platform: device
+    type: occupied
+  condition:
+  - after: 08:30:00
+    before: 22:30:000
+    condition: time
+  action:
+  - data:
+      brightness_pct: 70
+      kelvin: 2000
+      transition: 1
+    entity_id: group.second_bathroom_lights
+    service: light.turn_on
+- id: '1580023737744'
+  alias: Sunset (4:45)
+  description: ''
+  trigger:
+  - at: '16:45:00'
+    platform: time
+  condition: []
+  action:
+  - data:
+      brightness_pct: 100
+      profile: relax
+      transition: 900
+    entity_id: light.philips_lightstrip
+    service: light.turn_on
+  - data:
+      brightness_pct: 100
+      profile: relax
+      transition: 900
+    entity_id: light.philips_bulb_livingroom
+    service: light.turn_on
+  - data:
+      transition: 900
+    entity_id: light.hue_lightstrip_plus_1
+    service: light.turn_on
+- id: '1580055766826'
+  alias: Button - Double Click - Disable Bathroom Auto-off
+  description: ''
+  trigger:
+  - device_id: 65be4690c6514242bc9a25a68ccb1658
+    domain: zha
+    platform: device
+    subtype: remote_button_double_press
+    type: remote_button_double_press
+  condition: []
+  action:
+  - entity_id: automation.turn_off_bathroom_lights
+    service: automation.toggle
+- id: '1580167827573'
+  alias: Door unlocks
+  description: ''
+  trigger:
+  - entity_id: lock.front_door
+    from: locked
+    platform: state
+    to: unlocked
+  condition: []
+  action:
+  - data: {}
+    entity_id: script.door_open_flash_lights
+    service: script.turn_on
+  - data:
+      message: Front door got unlocked
+    service: notify.mobile_app_slyphone
+- id: '1580281307711'
+  alias: Living Room Night RED
+  description: ''
+  trigger:
+  - at: '20:20'
+    platform: time
+  condition: []
+  action:
+  - entity_id: script.1580351647581
+    service: script.turn_on
+- id: '1580352501547'
+  alias: AWAY - turn off lights
+  description: ''
+  trigger:
+  - entity_id: device_tracker.slyphone
+    event: leave
+    platform: zone
+    zone: zone.home
+  condition: []
+  action:
+  - entity_id: script.1580352531901
+    service: script.turn_on
+- id: '1580367787626'
+  alias: Heater ON at 630AM
+  description: ''
+  trigger:
+  - at: 06:30:00
+    platform: time
+  condition: []
+  action:
+  - data:
+      hvac_mode: heat
+    entity_id: climate.living_room_thermostat
+    service: climate.set_hvac_mode
+  - delay: '3'
+  - data:
+      temperature: 73
+    entity_id: climate.living_room_thermostat
+    service: climate.set_temperature
+- id: '1580704464732'
+  alias: Set custom theme on startup
+  description: ''
+  trigger:
+  - event: start
+    platform: homeassistant
+  condition: []
+  action:
+  - data:
+      name: slate
+    service: frontend.set_theme
+- id: '1580799513531'
+  alias: Turn on living room lights (after 7PM)
+  description: ''
+  trigger:
+  - device_id: 75c970e4dc2345cbbe667a1a2ab48adc
+    domain: binary_sensor
+    entity_id: binary_sensor.philips_sml001_7a54b604_occupancy
+    platform: device
+    type: occupied
+  condition:
+  - after: '21:00:00'
+    before: 07:30:00
+    condition: time
+  action:
+  - data:
+      brightness_pct: 50
+      transition: 1
+    entity_id: light.philips_bulb_livingroom
+    service: light.turn_on
+- id: '1580805874507'
+  alias: Turn off humidifier
+  description: ''
+  trigger:
+  - at: 07:00:00
+    platform: time
+  condition: []
+  action:
+  - entity_id: switch.wemo_mini
+    service: switch.turn_off
+- id: '1580848497127'
+  alias: BUTTON - Click - Toggle Lightstrip
+  description: ''
+  trigger:
+  - device_id: 65be4690c6514242bc9a25a68ccb1658
+    domain: zha
+    platform: device
+    subtype: remote_button_short_press
+    type: remote_button_short_press
+  condition: []
+  action:
+  - entity_id: light.philips_lightstrip
+    service: light.toggle
+- id: '1580885154818'
+  alias: Alarm
+  description: ''
+  trigger:
+  - at: 07:45:00
+    platform: time
+  condition: []
+  action:
+  - entity_id: script.1580885222594
+    service: script.turn_on
+- id: '1580945524186'
+  alias: SOS
+  description: ''
+  trigger:
+  - device_id: 65be4690c6514242bc9a25a68ccb1658
+    domain: zha
+    platform: device
+    subtype: remote_button_long_press
+    type: remote_button_long_press
+  condition: []
+  action:
+  - data:
+      message: SEND HELP.... sly
+      title: help
+    service: notify.email_notifications
