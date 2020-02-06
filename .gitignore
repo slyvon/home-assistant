@@ -13,3 +13,5 @@ tts/
 www/
 themes/
 .storage/
+.ssh
+.ssh/
