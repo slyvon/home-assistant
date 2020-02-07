@@ -307,7 +307,7 @@
     condition: time
   action:
   - data:
-      brightness_pct: 60
+      brightness_pct: 40
       rgb_color:
       - 255
       - 0

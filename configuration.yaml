@@ -7,8 +7,11 @@ http:
   base_url: !secret hass_url
   ssl_certificate: /ssl/fullchain.pem
   ssl_key: /ssl/privkey.pem
-  
 
+# Enable themes
+frontend:
+  themes: !include_dir_merge_named themes
+  
 # Text to speech
 tts:
   - platform: google_translate
@@ -23,8 +26,7 @@ scene: !include scenes.yaml
 zwave:
   network_key: !secret zwave_network_key
   
-
-# SendGrid
+# SOS email - temp
 notify:
   - name: email_notifications
     platform: smtp
@@ -47,15 +49,8 @@ badnest:
 climate:
   - platform: badnest
     scan_interval: 10
-
-
-  
-# Enable themes
-frontend:
-  themes: !include_dir_merge_named themes
  
- 
-
+# Custom sensors
 sensor:
     # RPi stats
   - platform: command_line
