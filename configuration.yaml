@@ -22,9 +22,9 @@ scene: !include scenes.yaml
 # Z Wave
 zwave:
   network_key: !secret zwave_network_key
+  
 
 # SendGrid
-
 notify:
   - name: email_notifications
     platform: smtp
