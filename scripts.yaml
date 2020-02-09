@@ -42,7 +42,7 @@ night_mode:
       transition: 1
     entity_id: light.philips_lightstrip
     service: light.turn_on
-'1580351436123':
+lightstrips_daytime:
   alias: LIGHTSTRIPS - daytime
   sequence:
   - data:
@@ -51,7 +51,7 @@ night_mode:
       transition: 1
     entity_id: light.philips_lightstrip
     service: light.turn_on
-'1580351647581':
+lightstrips_red:
   alias: LIVING ROOM - red
   sequence:
   - data:
@@ -63,7 +63,7 @@ night_mode:
       transition: 1
     entity_id: light.philips_bulb_livingroom
     service: light.turn_on
-'1580351705007':
+livingroom_daytime:
   alias: LIVING ROOM - daytime
   sequence:
   - data:
@@ -72,18 +72,18 @@ night_mode:
       transition: 1
     entity_id: light.philips_bulb_livingroom
     service: light.turn_on
-'1580352531901':
-  alias: Turn of all lights
+turn_off_all_lights:
+  alias: Turn off all lights
   sequence:
   - entity_id: light.philips_lightstrip
     service: light.turn_off
   - entity_id: light.philips_bulb_livingroom
     service: light.turn_off
-'1580372397207':
+restart_hass:
   alias: Restart HASS
   sequence:
   - service: homeassistant.restart
-'1580885222594':
+alarm_clock_lights:
   alias: ALARM CLOCK
   sequence:
   - data:
@@ -92,7 +92,7 @@ night_mode:
       transition: 900
     entity_id: light.philips_lightstrip
     service: light.turn_on
-'1581132800983':
+netflix_mode:
   alias: Netflix
   sequence:
   - entity_id: light.philips_bulb_livingroom

@@ -1,4 +1,4 @@
-- id: '1579926972374'
+- id: 'netflix_scene'
   name: Netflix
   entities:
     light.hue_color_lamp_1:
