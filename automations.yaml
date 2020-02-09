@@ -26,11 +26,8 @@
     before: '17:00:00'
     condition: time
   action:
-  - data:
-      brightness_pct: 90
-      kelvin: 6410
-      transition: 1
-    entity_id: group.bathroom_lights
+  - data: {}
+    entity_id: light.bathroom_lights
     service: light.turn_on
 - id: '1579998932428'
   alias: Turn off bathroom lights
@@ -47,7 +44,7 @@
     type: not_occupied
   condition: []
   action:
-  - entity_id: group.bathroom_lights
+  - entity_id: light.bathroom_lights
     service: light.turn_off
 - id: '1579999585311'
   alias: KITCHEN - auto shutoff
@@ -64,7 +61,7 @@
     type: not_occupied
   condition:
   - after: '18:00:00'
-    before: 07:00:00
+    before: 07:30:00
     condition: time
   action:
   - data:
@@ -89,27 +86,7 @@
       brightness_pct: 50
       kelvin: 2000
       transition: 1
-    entity_id: group.bathroom_lights
-    service: light.turn_on
-- id: '1580000683125'
-  alias: Bathroom lights (sleep)
-  description: ''
-  trigger:
-  - device_id: ddf9e2030aad43a49d330dc148c6eeca
-    domain: binary_sensor
-    entity_id: binary_sensor.philips_sml001_cdfeb504_occupancy
-    platform: device
-    type: occupied
-  condition:
-  - after: '21:00:00'
-    before: 07:30:00
-    condition: time
-  action:
-  - data:
-      brightness_pct: 2
-      kelvin: 2200
-      transition: 1
-    entity_id: group.bathroom_lights
+    entity_id: light.bathroom_lights
     service: light.turn_on
 - id: '1580001344814'
   alias: 2nd bathroom lights (day and night)
@@ -129,14 +106,14 @@
       brightness_pct: 70
       kelvin: 2000
       transition: 1
-    entity_id: group.second_bathroom_lights
+    entity_id: light.second_bathroom_lights
     service: light.turn_on
 - id: '1580023737744'
-  alias: Sunset (4:45)
+  alias: LIGHTS - Turn on at SUNSET
   description: ''
   trigger:
-  - at: '16:45:00'
-    platform: time
+  - event: sunset
+    platform: sun
   condition: []
   action:
   - data:
@@ -150,10 +127,6 @@
       profile: relax
       transition: 900
     entity_id: light.philips_bulb_livingroom
-    service: light.turn_on
-  - data:
-      transition: 900
-    entity_id: light.hue_lightstrip_plus_1
     service: light.turn_on
 - id: '1580055766826'
   alias: Button - Double Click - Disable Bathroom Auto-off

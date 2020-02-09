@@ -12,11 +12,19 @@ http:
 frontend:
   themes: !include_dir_merge_named themes
 
-# GOogle Assistant 
-google_assistant:
-  project_id: !secret google_assistant_project
-  service_account: !include SERVICE_ACCOUNT.JSON
-  report_state: true
+# Grouped Lights (better here than groups YAML)
+light:
+  - platform: group
+    name: Bathroom Lights
+    entities:
+        - light.philips_bathroom_bulb_1
+        - light.philips_bathroom_bulb_2
+  - platform: group
+    name: Second Bathroom Lights
+    entities:
+        - light.philips_bathroom_bulb_3
+        - light.philips_bathroom_bulb_4
+   
   
 # Text to speech
 tts:
@@ -46,6 +54,12 @@ notify:
       - !secret email_receiver1
       - !secret email_receiver2
     sender_name: SOS from Sly
+    
+# August
+august:
+  login_method: email
+  username: !secret august_username
+  password: !secret august_pw
 
 # Nest
 badnest:

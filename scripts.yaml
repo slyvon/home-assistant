@@ -20,11 +20,15 @@ door_open_flash_lights:
   - entity_id: light.philips_lightstrip
     service: light.toggle
 sleep_timer:
-  alias: 30-min lightstrip dim
+  alias: Bedtime
   sequence:
   - data:
-      transition: 300
+      transition: 600
     entity_id: light.philips_lightstrip
+    service: light.turn_off
+  - data:
+      transition: 600
+    entity_id: light.philips_bulb_livingroom
     service: light.turn_off
 night_mode:
   alias: LIGHTSTRIPS - red
@@ -88,3 +92,10 @@ night_mode:
       transition: 900
     entity_id: light.philips_lightstrip
     service: light.turn_on
+'1581132800983':
+  alias: Netflix
+  sequence:
+  - entity_id: light.philips_bulb_livingroom
+    service: light.turn_off
+  - data: {}
+    service: script.night_mode
