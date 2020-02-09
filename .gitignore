@@ -14,3 +14,4 @@ www/
 .storage/
 .ssh
 .ssh/
+.DS_Store
