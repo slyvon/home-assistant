@@ -51,7 +51,7 @@ lightstrips_daytime:
       transition: 1
     entity_id: light.philips_lightstrip
     service: light.turn_on
-lightstrips_red:
+livingroom_red:
   alias: LIVING ROOM - red
   sequence:
   - data:

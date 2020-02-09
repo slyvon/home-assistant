@@ -165,7 +165,7 @@
     platform: time
   condition: []
   action:
-  - entity_id: script.1580351647581
+  - entity_id: script.livingroom_red
     service: script.turn_on
 - id: '1580352501547'
   alias: AWAY - turn off lights
@@ -177,7 +177,7 @@
     zone: zone.home
   condition: []
   action:
-  - entity_id: script.1580352531901
+  - entity_id: script.turn_off_all_lights
     service: script.turn_on
 - id: '1580367787626'
   alias: Heater ON at 630AM
