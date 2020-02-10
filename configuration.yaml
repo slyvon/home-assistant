@@ -1,6 +1,7 @@
 
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
+shopping_list:
 
 # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
 http:
@@ -73,6 +74,17 @@ climate:
 # Custom sensors
 sensor:
     # RPi stats
+  - platform: systemmonitor
+    resources:
+      - type: disk_use_percent
+        arg: /home
+      - type: memory_use
+      - type: memory_use_percent
+      - type: network_in
+        arg: eth0
+      - type: network_out
+        arg: eth0
+      - type: processor_use
   - platform: command_line
     name: CPU Temperature
     command: "cat /sys/class/thermal/thermal_zone0/temp"
