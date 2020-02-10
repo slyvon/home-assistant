@@ -19,8 +19,8 @@ custom_components/.DS_Store
 
 
 # Directories
-node-red/
-tts/
-www/
-.storage/
-.ssh/
+node-red/*
+tts/*
+www/*
+.storage/*
+.ssh/*
