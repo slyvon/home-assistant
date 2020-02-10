@@ -1,6 +1,7 @@
 # Files
 .august.conf
 .shopping_list.json
+*.shopping_list.json
 .ssh
 .DS_Store
 *.DS_Store
