@@ -31,7 +31,7 @@ sleep_timer:
     entity_id: light.philips_bulb_livingroom
     service: light.turn_off
 night_mode:
-  alias: LIGHTSTRIPS - red
+  alias: MY ROOM - red
   sequence:
   - data:
       brightness_pct: 100
@@ -43,7 +43,7 @@ night_mode:
     entity_id: light.philips_lightstrip
     service: light.turn_on
 lightstrips_daytime:
-  alias: LIGHTSTRIPS - daytime
+  alias: MY ROOM - daytime
   sequence:
   - data:
       brightness_pct: 100
@@ -83,15 +83,6 @@ restart_hass:
   alias: Restart HASS
   sequence:
   - service: homeassistant.restart
-alarm_clock_lights:
-  alias: ALARM CLOCK
-  sequence:
-  - data:
-      brightness_pct: 100
-      profile: relax
-      transition: 900
-    entity_id: light.philips_lightstrip
-    service: light.turn_on
 netflix_mode:
   alias: Netflix
   sequence:

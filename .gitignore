@@ -1,5 +1,11 @@
-secrets.yaml
+# Files
 .august.conf
+.shopping_list.json
+.ssh
+.DS_Store
+*.DS_Store
+
+secrets.yaml
 options.xml
 aircast.xml
 home-assistant.log
@@ -9,11 +15,12 @@ pyozw.sqlite
 zigbee.db
 zwcfg_0xd60eff57.xml
 zwscene.xml
+custom_components/.DS_Store
+
+
+# Directories
+node-red/
 tts/
 www/
 .storage/
-.ssh
 .ssh/
-.DS_Store
-*.DS_Store
-custom_components/.DS_Store
