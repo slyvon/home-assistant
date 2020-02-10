@@ -64,7 +64,13 @@ badnest:
 climate:
   - platform: badnest
     scan_interval: 10
- 
+
+# August
+august:
+  login_method: email
+  username: !secret august_username
+  password: !secret august_pw
+
 # Custom sensors
 sensor:
     # RPi stats

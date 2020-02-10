@@ -15,3 +15,5 @@ www/
 .ssh
 .ssh/
 .DS_Store
+*.DS_Store
+custom_components/.DS_Store
